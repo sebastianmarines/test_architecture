@@ -12,7 +12,7 @@ with Diagram("AWS Architecture", show=False):
 
     with Cluster("VPC"):
         with Cluster("Private Subnets"):
-            ecs = ECS("Replica 1")
+            ecs = ECS("ECS Cluster")
             bastion_host = EC2("Bastion Host")
         with Cluster("DB Subnets"):
             db_group = [RDS("MySQL"), RDS("MySQL Standby")]
