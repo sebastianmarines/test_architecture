@@ -5,6 +5,9 @@ module "vpc" {
   name = local.name
   cidr = local.vpc_cidr
 
+  create_database_nat_gateway_route = false
+  enable_nat_gateway                = true
+
   azs = local.azs
   database_subnets = [
     "10.0.0.0/28",
