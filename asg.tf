@@ -46,6 +46,7 @@ module "autoscaling" {
   # https://github.com/hashicorp/terraform-provider-aws/issues/12582
   autoscaling_group_tags = {
     AmazonECSManaged = true
+    "Patch Group"    = aws_ssm_patch_group.ecs.id
   }
 
   # Required for  managed_termination_protection = "ENABLED"
