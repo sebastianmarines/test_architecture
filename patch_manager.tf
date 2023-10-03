@@ -23,8 +23,11 @@ resource "aws_ssm_maintenance_window_target" "ecs" {
   window_id     = aws_ssm_maintenance_window.ecs.id
   resource_type = "INSTANCE"
   targets {
-    key    = "tag:Patch Group"
-    values = [aws_ssm_patch_group.ecs.id]
+    key = "tag:Patch Group"
+    values = [
+      aws_ssm_patch_group.ecs.id,
+      "bastion-hosts"
+    ]
   }
   owner_information = "ECS"
 }
