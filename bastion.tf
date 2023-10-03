@@ -50,6 +50,11 @@ resource "aws_iam_role_policy_attachment" "bastion_host" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }
 
+resource "aws_iam_role_policy_attachment" "bastion_host_rds" {
+  role       = aws_iam_role.bastion_host.name
+  policy_arn = aws_iam_policy.rds_iam_access.arn
+}
+
 module "bastion_host" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "5.5.0"

@@ -42,3 +42,20 @@ module "rds" {
 
   manage_master_user_password = true
 }
+
+resource "aws_iam_policy" "rds_iam_access" {
+  name        = "rds_iam_access"
+  description = "Allows access to RDS resources"
+  policy      = data.aws_iam_policy_document.rds_iam_access.json
+}
+
+data "aws_iam_policy_document" "rds_iam_access" {
+  statement {
+    actions = [
+      "rds-db:connect"
+    ]
+    resources = [
+      "arn:aws:rds-db:${local.region}:${data.aws_caller_identity.current.account_id}:dbuser:${module.rds.db_instance_resource_id}/atrato"
+    ]
+  }
+}
